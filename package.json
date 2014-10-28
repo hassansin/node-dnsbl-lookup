@@ -1,5 +1,5 @@
 {
-  "name": "node-dnsbl-lookup",
+  "name": "dnsbl-lookup",
   "version": "0.1.0",
   "description": "Node.js DNSBLs Lookup",
   "main": "index.js",

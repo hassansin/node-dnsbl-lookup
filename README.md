@@ -1,8 +1,8 @@
 ## Node.js DNSBLs Lookup
 supports IPv4, IPv6 and Domain lookup
 ### Installation
-    npm install node-dnsbl-lookup
-    var lookup = require('node-dnsbl-lookup');
+    npm install dnsbl-lookup
+    var lookup = require('dnsbl-lookup');
     
 ### Examples
 DNSBL Lookup:
