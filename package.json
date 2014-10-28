@@ -1,6 +1,6 @@
 {
   "name": "dnsbl-lookup",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Node.js DNSBLs Lookup",
   "main": "index.js",
   "scripts": {
@@ -21,11 +21,17 @@
     "blocklist",
     "rhsbl",
     "lookup",
-    "query"
+    "query",
+    "cli",
+    "command-line"
   ],
   "engines": {
     "node": ""
   },
+  "bin" : {
+    "dnsbl-lookup" : "bin/dnsbl-lookup"
+  },
+  "preferGlobal" : true,
   "author": {
     "name": "hassansin",
     "url": "https://github.com/hassansin"
