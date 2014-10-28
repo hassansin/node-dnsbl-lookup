@@ -1,4 +1,5 @@
 var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.org/list/
+  dnsbl_v6_list = require('./list/dnsbl_v6_list'), //source: http://multirbl.valli.org/list/
   uribl_list = require('./list/uribl_list'), //source: http://multirbl.valli.org/list/
   LIMIT = 20,
   async = require('async'), 
@@ -6,15 +7,6 @@ var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.o
   util = require('util'),
   events = require("events");
 
-function isIP(str) {
-    if (ip.isIPv4(str)) {
-        return 4;
-    } else if (ip.isIPv6(str)) {
-        return 6;
-    } else {
-        return 0;
-    }
-};
 function isIPv4(str) {
     if (/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/.test(str)) {  
         return true;
@@ -27,7 +19,15 @@ function isIPv6(str) {
     }
     return false;
 };
-
+function isIP(str) {
+    if (isIPv4(str)) {
+        return 4;
+    } else if (isIPv6(str)) {
+        return 6;
+    } else {
+        return 0;
+    }
+};
 //https://gist.github.com/Mottie/7018157
 function expandIPv6Address(address)
 {
@@ -124,17 +124,18 @@ function multi_lookup(address,list,limit){
 
 function dnsbl(ip_or_domain,limit,list){ 
   var root = this; 
-  var address = '';
-  list = list || dnsbl_list;
+  var address = '';  
   limit = limit || 10;  
     
   if(isIPv4(ip_or_domain)){
     address = ip_or_domain.split('.').reverse().join('.');
+    list = list || dnsbl_list;
     multi_lookup.call(this,address,list,limit);
   }  
   else if(isIPv6(ip_or_domain)){
     address = expandIPv6Address(ip_or_domain);
     address = address.split(/:|/).reverse().join('.');    
+    list = list || dnsbl_v6_list;
     multi_lookup.call(this,address,list,limit);
   }
   else{
@@ -166,3 +167,4 @@ util.inherits(dnsbl, events.EventEmitter);
 util.inherits(uribl,events.EventEmitter);
 exports.dnsbl = dnsbl;
 exports.uribl = uribl;
+exports.isIP = isIP;

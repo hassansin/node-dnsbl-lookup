@@ -1,8 +1,9 @@
 ## Node.js DNSBLs Lookup
-supports IPv4, IPv6 and Domain lookup
+Supports IPv4, IPv6 and Domain lookup. Works from command-line.
 ### Installation
-    npm install dnsbl-lookup
-    var lookup = require('dnsbl-lookup');
+    npm install dnsbl-lookup -g
+    var lookup = require('dnsbl-lookup'); // inside module
+    
     
 ### Examples
 DNSBL Lookup:
@@ -21,9 +22,15 @@ URIBL Lookup:
     uribl.on('data',function(response,bl){ ... });
     uribl.on('done', function(){ ... });  
 
+Command-line:
+     
+    $ dnsbl-lookup 58.97.142.25
+    $ dnsbl-lookup 2a01:4f8:140:4222::2
+    $ dnsbl-lookup gmail.com list.txt // list.txt is line-separated dns zones 
+
 _see more examples in test.js_
 
-   responses:
+   Responses:
 
     { status: 'not_listed' }
     
