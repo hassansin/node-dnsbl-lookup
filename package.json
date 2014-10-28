@@ -4,7 +4,7 @@
   "description": "Node.js DNSBLs Lookup",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec -t 5000"
+    "test": "mocha -R spec -t 60000"
   },
   "repository": {
     "type": "git",

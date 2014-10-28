@@ -17,7 +17,7 @@ describe('DNSBL IPv4', function(){
 
 describe('DNSBL IPv6', function(){
   it('should work', function(done){
-    var list = require('./dnsbl_v6_list');
+    var list = require('./list/dnsbl_v6_list');
     var dnsbl = new lookup.dnsbl('2a01:4f8:140:4222::2',1,list);
     dnsbl.on('error',function(err,bl){        
       console.log(err,bl);

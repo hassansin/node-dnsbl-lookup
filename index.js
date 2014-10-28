@@ -1,5 +1,5 @@
-var dnsbl_list = require('./dnsbl_list'), //source: http://multirbl.valli.org/list/
-  uribl_list = require('./uribl_list'), //source: http://multirbl.valli.org/list/
+var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.org/list/
+  uribl_list = require('./list/uribl_list'), //source: http://multirbl.valli.org/list/
   LIMIT = 20,
   async = require('async'), 
   dns = require('dns'),
