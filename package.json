@@ -1,6 +1,6 @@
 {
   "name": "node-dnsbl-lookup",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Node.js DNSBLs Lookup",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "rbl",
     "dns blocklist",
     "dnsbl",
+    "uribl",
     "blacklist",
     "multirbl",
     "blocklist",
@@ -22,6 +23,9 @@
     "lookup",
     "query"
   ],
+  "engines": {
+    "node": ""
+  },
   "author": {
     "name": "hassansin",
     "url": "https://github.com/hassansin"

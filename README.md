@@ -1,15 +1,27 @@
-# Node.js DNSBLs Lookup
-
+## Node.js DNSBLs Lookup
+supports IPv4, IPv6 and Domain lookup
+### Installation
     npm install node-dnsbl-lookup
+    var lookup = require('node-dnsbl-lookup');
     
 ### Examples
-    var lookup = require('node-dnsbl-lookup');
+DNSBL Lookup:
 
     var dnsbl = new lookup.dnsbl(ip_or_domain, [dnsbl_list] ,[limit]);
 
     dnsbl.on('error',function(err,bl){ ... });
     dnsbl.on('data',function(response,bl){ ... });
     dnsbl.on('done', function(){ ... });  
+
+URIBL Lookup:
+
+    var uribl= new lookup.uribl(domain, [uribl_list] ,[limit]);
+
+    uribl.on('error',function(err,bl){ ... });
+    uribl.on('data',function(response,bl){ ... });
+    uribl.on('done', function(){ ... });  
+
+_see more examples in test.js_
 
    responses:
 

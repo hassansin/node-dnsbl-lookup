@@ -1,6 +1,3 @@
-
-//source: http://multirbl.valli.org/dnsbl-lookup
-module.exports = 
 [
   {
     "zone": "0spam.fusionzero.com",
@@ -163,11 +160,6 @@ module.exports =
     "url": "http://cbl.abuseat.org/"
   },
   {
-    "zone": "rbl.choon.net",
-    "name": "choon.net IPv4 DNSBL",
-    "url": "https://choon.net/rbl.php"
-  },
-  {
     "zone": "bogons.cymru.com",
     "name": "Cymru Bogon List",
     "url": "http://www.team-cymru.org/Services/Bogons/"
@@ -186,11 +178,6 @@ module.exports =
     "zone": "rbl.dns-servicios.com",
     "name": "DNS-SERVICIOS RBL",
     "url": "http://rbl.dns-servicios.com/"
-  },
-  {
-    "zone": "dnsbl.ipocalypse.net",
-    "name": "dnsbl.ipocalypse.net",
-    "url": "http://ipocalypse.net/"
   },
   {
     "zone": "dnsbl.net.ua",
@@ -478,11 +465,6 @@ module.exports =
     "url": "http://nszones.com/"
   },
   {
-    "zone": "dnsbl.openresolvers.org",
-    "name": "Open Resolver Check",
-    "url": "http://dns.measurement-factory.com/surveys/openresolvers.html"
-  },
-  {
     "zone": "rbl.orbitrbl.com",
     "name": "ORBITrbl",
     "url": "http://www.orbitrbl.com/"
@@ -496,11 +478,6 @@ module.exports =
     "zone": "pofon.foobar.hu",
     "name": "pofon.foobar.hu IP Blacklist",
     "url": "https://rbl.foobar.hu/"
-  },
-  {
-    "zone": "rbl.polarcomm.net",
-    "name": "Polar Communications Admin RBL",
-    "url": "http://rbl.polarcomm.net/"
   },
   {
     "zone": "(hidden)",
@@ -808,21 +785,6 @@ module.exports =
     "url": "http://spamstinks.com/"
   },
   {
-    "zone": "badhost.stopspam.org",
-    "name": "StopSpam.org badhost",
-    "url": "http://www.stopspam.org/rblcheck/index.php"
-  },
-  {
-    "zone": "block.stopspam.org",
-    "name": "StopSpam.org block",
-    "url": "http://www.stopspam.org/rblcheck/index.php"
-  },
-  {
-    "zone": "dnsbl.stopspam.org",
-    "name": "StopSpam.org dnsbl",
-    "url": "http://www.stopspam.org/rblcheck/index.php"
-  },
-  {
     "zone": "dul.pacifier.net",
     "name": "StopSpam.org dul",
     "url": "http://www.stopspam.org/rblcheck/index.php"
@@ -838,19 +800,9 @@ module.exports =
     "url": "http://www.surbl.org/"
   },
   {
-    "zone": "dnsbl.swiftbl.org",
-    "name": "SwiftBL",
-    "url": "http://swiftbl.org/"
-  },
-  {
     "zone": "dnsrbl.swinog.ch",
     "name": "Swinog DNSRBL",
     "url": "http://antispam.imp.ch/06-dnsbl.php?lng=1"
-  },
-  {
-    "zone": "bl.technovision.dk",
-    "name": "Technovision Spamsource List",
-    "url": "http://bl.technovision.dk/"
   },
   {
     "zone": "st.technovision.dk",
@@ -903,11 +855,6 @@ module.exports =
     "url": "http://v4bl.org/"
   },
   {
-    "zone": "ip.v4bl.org",
-    "name": "V4BL/DDNSBL",
-    "url": "http://v4bl.org/"
-  },
-  {
     "zone": "virbl.dnsbl.bit.nl",
     "name": "Virbl",
     "url": "http://virbl.bit.nl/"
@@ -937,4 +884,4 @@ module.exports =
     "name": "ZapBL DNSRBL",
     "url": "http://zapbl.net/"
   }
-];
+]
