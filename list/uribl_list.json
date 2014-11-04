@@ -50,11 +50,6 @@
     "url": "http://software.othello.ch/mod_dnsbl/"
   },
   {
-    "zone": "(hidden)",
-    "name": "invaluement DNSBL ivmURI",
-    "url": "http://dnsbl.invaluement.com/"
-  },
-  {
     "zone": "rhsbl.mailhosts.org",
     "name": "Mailhosts.org RHSBL",
     "url": "http://mailhosts.org/"

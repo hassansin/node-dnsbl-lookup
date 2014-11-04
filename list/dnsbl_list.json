@@ -190,11 +190,6 @@
     "url": "http://dnsbl.rv-soft.info/"
   },
   {
-    "zone": "dnsblchile.org",
-    "name": "dnsblchile.org",
-    "url": "http://www.dnsblchile.org/"
-  },
-  {
     "zone": "vote.drbl.caravan.ru",
     "name": "DRBL vote node caravan.ru",
     "url": "http://drbl.caravan.ru/"

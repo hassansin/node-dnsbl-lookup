@@ -1,7 +1,7 @@
 {
   "name": "dnsbl-lookup",
-  "version": "0.2.0",
-  "description": "Node.js DNSBLs Lookup",
+  "version": "0.3.0",
+  "description": "Node.js multi DNSBL/URIBL Lookup",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec -t 60000"

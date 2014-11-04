@@ -32,9 +32,11 @@ _see more examples in test.js_
 
    Responses:
 
-    { status: 'not_listed' }
+    { address:'58.97.142.25', status: 'not_listed' }
     
-    { status: 'listed',
+    { 
+      address: '58.97.142.25',
+      status: 'listed',
       A: '127.0.0.2',
       TXT: 'Blocked - see http://cbl.abuseat.org/lookup.cgi?ip=58.97.142.25' 
     }

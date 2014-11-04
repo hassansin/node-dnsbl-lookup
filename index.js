@@ -79,6 +79,16 @@ function expandIPv6Address(address)
     }
     return expandedAddress;
 }
+function reverseIP(address){
+  if(isIPv4(address)){
+    address = address.split('.').reverse().join('.');
+  }
+  else if(isIPv6(address)){
+    address = expandIPv6Address(address);
+    address = address.split(/:|/).reverse().join('.');  
+  }
+  return address;
+}
 
 function do_a_lookup(host,callback){    
   dns.resolve(host,function(err,addresses){              
@@ -91,9 +101,9 @@ function do_a_lookup(host,callback){
       }          
     } 
     else if(addresses){      
-      dns.resolveTxt(host,function(err,addresses2){           
-        if(addresses2){
-          return callback(null,{status:'listed', 'A':addresses.join(' , '), 'TXT':addresses2.join("\n")});
+      dns.resolveTxt(host,function(err,records){           
+        if(records){
+          return callback(null,{status:'listed', 'A':addresses.join(' , '), 'TXT':records.join("\n")});
         }
         return callback(null,{status:'listed', 'A':addresses.join(' , ')});
       });          
@@ -103,49 +113,55 @@ function do_a_lookup(host,callback){
   });
 };
 
-function multi_lookup(address,list,limit){
+function multi_lookup(addresses,list,limit){
   var root = this;  
-  async.eachLimit(list,limit,function(item,callback){
-    var zone = item.zone || item,
-      host = address+ '.' + zone; 
+  addresses = Array.isArray(addresses)?addresses: [addresses];  
+  
+  async.eachSeries(addresses,function(address,callback_a){
+    var lookup_address = reverseIP(address);    
+    async.eachLimit(list,limit,function(item,callback_b){
+      var zone = item.zone || item,
+        host = lookup_address+ '.' + zone; 
 
-    do_a_lookup(host,function(err,res){
-      if(err)
-        root.emit('error',err,item);
-      else{        
-        root.emit('data',res,item);
-      }        
-      callback();
+      do_a_lookup(host,function(err,res){
+        if(err)
+          root.emit('error',err,item);
+        else{   
+          res.address = address;     
+          root.emit('data',res,item);
+        }        
+        callback_b();
+      });
+    },function(err){
+      callback_a(err);      
     });
   },function(err){
     root.emit('done');
-  })
+  });
+    
 };
 
-function dnsbl(ip_or_domain,limit,list){ 
-  var root = this; 
-  var address = '';  
+function dnsbl(ip_or_domain,list,limit){ 
+  var root = this;
+
   limit = limit || 10;  
-    
-  if(isIPv4(ip_or_domain)){
-    address = ip_or_domain.split('.').reverse().join('.');
+   
+  if(isIPv4(ip_or_domain)){    
     list = list || dnsbl_list;
-    multi_lookup.call(this,address,list,limit);
+    multi_lookup.call(this,ip_or_domain,list,limit);
   }  
-  else if(isIPv6(ip_or_domain)){
-    address = expandIPv6Address(ip_or_domain);
-    address = address.split(/:|/).reverse().join('.');    
+  else if(isIPv6(ip_or_domain)){    
     list = list || dnsbl_v6_list;
-    multi_lookup.call(this,address,list,limit);
+    multi_lookup.call(this,ip_or_domain,list,limit);
   }
   else{
     dns.resolve(ip_or_domain,function(err,addresses){        
       if(err){
         root.emit('error',err);
+        root.emit('done');
       }
-      else if(addresses){
-        address = addresses[0].split('.').reverse().join('.');
-        multi_lookup.call(root,address,list,limit);
+      else if(addresses){        
+        multi_lookup.call(root,addresses,list,limit);
       }
       else {
 
@@ -155,7 +171,7 @@ function dnsbl(ip_or_domain,limit,list){
   events.EventEmitter.call(this);
 };
 
-function uribl(domain,limit,list){
+function uribl(domain,list,limit){
   list = list || uribl_list;
   limit = limit || 10;
 
@@ -168,3 +184,4 @@ util.inherits(uribl,events.EventEmitter);
 exports.dnsbl = dnsbl;
 exports.uribl = uribl;
 exports.isIP = isIP;
+exports.reverseIP = reverseIP;
