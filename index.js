@@ -5,29 +5,9 @@ var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.o
   async = require('async'), 
   dns = require('dns'),
   util = require('util'),
+  net = require('net'),
   events = require("events");
 
-function isIPv4(str) {
-    if (/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/.test(str)) {  
-        return true;
-    }
-    return false;
-};
-function isIPv6(str) {
-    if (/^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$/.test(str)) {
-        return true;
-    }
-    return false;
-};
-function isIP(str) {
-    if (isIPv4(str)) {
-        return 4;
-    } else if (isIPv6(str)) {
-        return 6;
-    } else {
-        return 0;
-    }
-};
 //https://gist.github.com/Mottie/7018157
 function expandIPv6Address(address)
 {
@@ -80,10 +60,10 @@ function expandIPv6Address(address)
     return expandedAddress;
 }
 function reverseIP(address){
-  if(isIPv4(address)){
+  if(net.isIPv4(address)){
     address = address.split('.').reverse().join('.');
   }
-  else if(isIPv6(address)){
+  else if(net.isIPv6(address)){
     address = expandIPv6Address(address);
     address = address.split(/:|/).reverse().join('.');  
   }
@@ -146,11 +126,11 @@ function dnsbl(ip_or_domain,list,limit){
 
   limit = limit || 10;  
    
-  if(isIPv4(ip_or_domain)){    
+  if(net.isIPv4(ip_or_domain)){    
     list = list || dnsbl_list;
     multi_lookup.call(this,ip_or_domain,list,limit);
   }  
-  else if(isIPv6(ip_or_domain)){    
+  else if(net.isIPv6(ip_or_domain)){    
     list = list || dnsbl_v6_list;
     multi_lookup.call(this,ip_or_domain,list,limit);
   }
@@ -183,5 +163,4 @@ util.inherits(dnsbl, events.EventEmitter);
 util.inherits(uribl,events.EventEmitter);
 exports.dnsbl = dnsbl;
 exports.uribl = uribl;
-exports.isIP = isIP;
 exports.reverseIP = reverseIP;

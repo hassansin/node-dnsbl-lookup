@@ -4,6 +4,7 @@ var lookup =  require('../index'),
 	address = process.argv[2],	
 	list = process.argv[3],
 	util = require('util'),
+	net = require('net'),
 	limit = process.argv[4],
 	fs = require('fs'),
 	handle;
@@ -19,7 +20,7 @@ if(list){
 	}
 }
 
-if(!lookup.isIP(address)){
+if(!net.isIP(address)){
 	handle = lookup.uribl;
 }
 else{
