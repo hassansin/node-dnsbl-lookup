@@ -1,7 +1,7 @@
 var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.org/list/
   dnsbl_v6_list = require('./list/dnsbl_v6_list'), //source: http://multirbl.valli.org/list/
   uribl_list = require('./list/uribl_list'), //source: http://multirbl.valli.org/list/
-  LIMIT = 20,
+  LIMIT = 200,
   async = require('async'), 
   dns = require('dns'),
   util = require('util'),
@@ -96,10 +96,11 @@ function do_a_lookup(host,callback){
 function multi_lookup(addresses,list,limit){
   var root = this;  
   addresses = Array.isArray(addresses)?addresses: [addresses];  
+  limit = limit || LIMIT;
   
   async.eachSeries(addresses,function(address,callback_a){
     var lookup_address = reverseIP(address);    
-    async.eachLimit(list,limit,function(item,callback_b){
+    async.eachLimit(list,limit,function(item,callback_b){      
       var zone = item.zone || item,
         host = lookup_address+ '.' + zone; 
 
@@ -113,18 +114,18 @@ function multi_lookup(addresses,list,limit){
         callback_b();
       });
     },function(err){
+      if(err) throw err;
       callback_a(err);      
     });
   },function(err){
+    if(err) throw err;
     root.emit('done');
   });
     
 };
 
 function dnsbl(ip_or_domain,list,limit){ 
-  var root = this;
-
-  limit = limit || 10;  
+  var root = this; 
    
   if(net.isIPv4(ip_or_domain)){    
     list = list || dnsbl_list;
@@ -152,8 +153,7 @@ function dnsbl(ip_or_domain,list,limit){
 };
 
 function uribl(domain,list,limit){
-  list = list || uribl_list;
-  limit = limit || 10;
+  list = list || uribl_list;  
 
   multi_lookup.call(this,domain,list,limit);
   events.EventEmitter.call(this);
