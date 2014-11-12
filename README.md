@@ -1,14 +1,15 @@
 ## Node.js DNSBLs Lookup
 Supports IPv4, IPv6 and Domain lookup. Works from command-line.
 ## Installation
-    npm install dnsbl-lookup -g
-    var lookup = require('dnsbl-lookup'); // inside module
-    
+```javascript
+npm install dnsbl-lookup -g
+var lookup = require('dnsbl-lookup'); // inside module
+```    
     
 ## Usage
 #### [DNSBL Lookup](http://en.wikipedia.org/wiki/DNSBL#DNSBL_queries):
 
-##### dnsbl(ip-or-domains,[dnsbl_list],[limit])
+##### dnsbl(ip-or-domain,[dnsbl_list],[limit])
 Performs DNSBL lookup on the given IP address. If a domain is provided, lookup is performed on it's 'A' records. 
 
  * `ip-or-domain`: String containing IPv4, IPv6 or domain names
@@ -17,15 +18,17 @@ Performs DNSBL lookup on the given IP address. If a domain is provided, lookup i
 
 ##### Example:
 
-    var dnsbl = new lookup.dnsbl('58.97.142.25');
+```javascript
+var dnsbl = new lookup.dnsbl('58.97.142.25');
 
-    dnsbl.on('error',function(error,blocklist){ ... });
-    dnsbl.on('data',function(result,blocklist){
-      console.log(result.status + ' in ' + blocklist.zone);
-    });
-    dnsbl.on('done', function(){ 
-      console.log('lookup finished');
-    });  
+dnsbl.on('error',function(error,blocklist){ ... });
+dnsbl.on('data',function(result,blocklist){
+  console.log(result.status + ' in ' + blocklist.zone);
+});
+dnsbl.on('done', function(){ 
+  console.log('lookup finished');
+});  
+```
 
 #### [URI DNSBL Lookup](http://en.wikipedia.org/wiki/DNSBL#URI_DNSBL) :
 
@@ -38,11 +41,13 @@ Performs a URI DNSBL query on the give domain(s).
 
 ##### Example:
 
-    var uribl= new lookup.uribl('gmail.com');
+```javascript
+var uribl= new lookup.uribl('gmail.com');
 
-    uribl.on('error',function(error,blocklist){ ... });
-    uribl.on('data',function(result,blocklist){ ... });
-    uribl.on('done', function(){ ... });  
+uribl.on('error',function(error,blocklist){ ... });
+uribl.on('data',function(result,blocklist){ ... });
+uribl.on('done', function(){ ... });  
+```
 
 _see more examples in test.js_
 
@@ -51,20 +56,24 @@ _see more examples in test.js_
  * `status`: listed / not_listed
  * `A`: 'A' record lookup result only when listed
  * `TXT`: 'TXT' record lookup result if found
-#  
-    //if not listed
-    { address:'58.97.142.25', status: 'not_listed' }
-    
-    //if listed
-    { 
-      address: '58.97.142.25',
-      status: 'listed',
-      A: '127.0.0.2',
-      TXT: 'Blocked - see http://cbl.abuseat.org/lookup.cgi?ip=58.97.142.25' 
-    }
+
+```javascript  
+//if not listed
+{ address:'58.97.142.25', status: 'not_listed' }
+
+//if listed
+{ 
+  address: '58.97.142.25',
+  status: 'listed',
+  A: '127.0.0.2',
+  TXT: 'Blocked - see http://cbl.abuseat.org/lookup.cgi?ip=58.97.142.25' 
+}
+```
 
 ### Command-line:
-     
-    $ dnsbl-lookup 58.97.142.25
-    $ dnsbl-lookup 2a01:4f8:140:4222::2
-    $ dnsbl-lookup gmail.com list.txt // list.txt is line-separated dns zones 
+
+```bash     
+$ dnsbl-lookup 58.97.142.25
+$ dnsbl-lookup 2a01:4f8:140:4222::2
+$ dnsbl-lookup gmail.com list.txt // list.txt is line-separated dns zones 
+```
