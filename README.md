@@ -1,4 +1,5 @@
-## Node.js DNSBLs Lookup
+## Node.js DNSBLs Lookup [![Build Status](https://travis-ci.org/hassansin/node-dnsbl-lookup.svg?branch=master)](https://travis-ci.org/hassansin/node-dnsbl-lookup)
+
 Supports IPv4, IPv6 and Domain lookup. Works from command-line.
 ## Installation
 ```javascript
