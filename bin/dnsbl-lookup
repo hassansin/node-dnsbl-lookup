@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 
 var lookup =  require('../index'),
 	address = process.argv[2],	
@@ -16,7 +17,7 @@ if(list){
 	}
 	catch(err){
 		util.error(err);
-		return;
+		return ;
 	}
 }
 

@@ -1,3 +1,5 @@
+"use strict";
+
 var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.org/list/
   dnsbl_v6_list = require('./list/dnsbl_v6_list'), //source: http://multirbl.valli.org/list/
   uribl_list = require('./list/uribl_list'), //source: http://multirbl.valli.org/list/
@@ -81,7 +83,10 @@ function do_a_lookup(host,callback){
       }          
     } 
     else if(addresses){      
-      dns.resolveTxt(host,function(err,records){           
+      dns.resolveTxt(host,function(err,records){
+        if(err){
+          return callback(err);
+        }
         if(records){
           return callback(null,{status:'listed', 'A':addresses.join(' , '), 'TXT':records.join("\n")});
         }
@@ -91,7 +96,7 @@ function do_a_lookup(host,callback){
     else  
       return callback(null,null);             
   });
-};
+}
 
 function multi_lookup(addresses,list,limit){
   var root = this;  
@@ -121,8 +126,7 @@ function multi_lookup(addresses,list,limit){
     if(err) throw err;
     root.emit('done');
   });
-    
-};
+}
 
 function dnsbl(ip_or_domain,list,limit){ 
   var root = this; 
@@ -141,16 +145,17 @@ function dnsbl(ip_or_domain,list,limit){
         root.emit('error',err);
         root.emit('done');
       }
-      else if(addresses){        
+      else if(addresses){
+        list = list || dnsbl_list;
         multi_lookup.call(root,addresses,list,limit);
       }
       else {
 
       }
-    })
+    });
   }  
   events.EventEmitter.call(this);
-};
+}
 
 function uribl(domain,list,limit){
   list = list || uribl_list;  

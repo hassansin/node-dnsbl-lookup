@@ -1,3 +1,5 @@
+"use strict";
+
 var lookup = require('./index.js');
 var assert = require('assert');
 
@@ -12,7 +14,7 @@ describe('DNSBL IPv4', function(){
     	result[bl] = response;	
     });
     dnsbl.on('done', function(){                  
-      done(assert.deepEqual(result,{"sbl.spamhaus.org":{status:"not_listed",address:"58.97.142.25"},"cbl.abuseat.org":{status:"listed",A:"127.0.0.2",TXT:"Blocked - see http://cbl.abuseat.org/lookup.cgi?ip=58.97.142.25",address:"58.97.142.25"},"pbl.spamhaus.org":{status:"listed",A:"127.0.0.10",TXT:"http://www.spamhaus.org/query/bl?ip=58.97.142.25",address:"58.97.142.25"}}));
+      done(assert.deepEqual(result,{"sbl.spamhaus.org":{status:"not_listed",address:"58.97.142.25"},"cbl.abuseat.org":{status:"not_listed",address:"58.97.142.25"},"pbl.spamhaus.org":{status:"not_listed",address:"58.97.142.25"}}));
     });    
   });
 });

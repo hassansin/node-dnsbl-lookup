@@ -1,6 +1,6 @@
 {
   "name": "dnsbl-lookup",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Node.js multi DNSBL/URIBL Lookup",
   "main": "index.js",
   "scripts": {
