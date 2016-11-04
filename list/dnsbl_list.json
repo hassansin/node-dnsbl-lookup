@@ -125,11 +125,6 @@
     "url": "http://bsb.spamlookup.net/"
   },
   {
-    "zone": "dnsbl.burnt-tech.com",
-    "name": "Burnt-Tech DNSBL",
-    "url": "http://dnsbl.burnt-tech.com/"
-  },
-  {
     "zone": "blacklist.sci.kun.nl",
     "name": "C&CZ's own black list",
     "url": "http://wiki.science.ru.nl/cncz/Email_spam"
