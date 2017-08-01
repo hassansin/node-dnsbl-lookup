@@ -20,11 +20,6 @@
     "url": "http://www.apews.org/"
   },
   {
-    "zone": "dnsbl.aspnet.hu",
-    "name": "ASPnet DNSBL/URIBL",
-    "url": "http://dnsbl.aspnet.hu/"
-  },
-  {
     "zone": "bsb.empty.us",
     "name": "Blog Spam Blocklist (empty.us)",
     "url": "http://bsb.empty.us/"
@@ -127,11 +122,6 @@
   {
     "zone": "multi.surbl.org",
     "name": "SURBL multi (Combined SURBL list)",
-    "url": "http://www.surbl.org/"
-  },
-  {
-    "zone": "xs.surbl.org",
-    "name": "SURBL xs (snowshoe and pill domains)",
     "url": "http://www.surbl.org/"
   },
   {

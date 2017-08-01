@@ -50,11 +50,6 @@
     "url": "http://www.aspews.org/"
   },
   {
-    "zone": "dnsbl.aspnet.hu",
-    "name": "ASPnet DNSBL/URIBL",
-    "url": "http://dnsbl.aspnet.hu/"
-  },
-  {
     "zone": "ips.backscatterer.org",
     "name": "Backscatterer.org",
     "url": "http://www.backscatterer.org/"
@@ -480,11 +475,6 @@
     "url": "http://www.projecthoneypot.org/"
   },
   {
-    "zone": "dnsbl.proxybl.org",
-    "name": "proxyBL",
-    "url": "http://proxybl.org/"
-  },
-  {
     "zone": "psbl.surriel.com",
     "name": "PSBL (Passive Spam Block List)",
     "url": "http://psbl.surriel.com/"
@@ -700,11 +690,6 @@
     "url": "http://www.spamcannibal.org/"
   },
   {
-    "zone": "dnsbl.spam-champuru.livedoor.com",
-    "name": "SpamChampuru DNSBL",
-    "url": "http://spam-champuru.livedoor.com/dnsbl/"
-  },
-  {
     "zone": "bl.spamcop.net",
     "name": "SpamCop Blocking List",
     "url": "http://spamcop.net/bl.shtml"
@@ -782,11 +767,6 @@
   {
     "zone": "multi.surbl.org",
     "name": "SURBL multi (Combined SURBL list)",
-    "url": "http://www.surbl.org/"
-  },
-  {
-    "zone": "xs.surbl.org",
-    "name": "SURBL xs (snowshoe and pill domains)",
     "url": "http://www.surbl.org/"
   },
   {
