@@ -20,11 +20,6 @@
     "url": "http://www.apews.org/"
   },
   {
-    "zone": "dnsbl.aspnet.hu",
-    "name": "ASPnet DNSBL/URIBL",
-    "url": "http://dnsbl.aspnet.hu/"
-  },
-  {
     "zone": "bsb.empty.us",
     "name": "Blog Spam Blocklist (empty.us)",
     "url": "http://bsb.empty.us/"
