@@ -125,11 +125,6 @@
     "url": "http://www.surbl.org/"
   },
   {
-    "zone": "xs.surbl.org",
-    "name": "SURBL xs (snowshoe and pill domains)",
-    "url": "http://www.surbl.org/"
-  },
-  {
     "zone": "uribl.swinog.ch",
     "name": "Swinog URIBL",
     "url": "http://antispam.imp.ch/05-uribl.php?lng=1"

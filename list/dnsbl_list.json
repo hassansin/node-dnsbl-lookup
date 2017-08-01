@@ -770,11 +770,6 @@
     "url": "http://www.surbl.org/"
   },
   {
-    "zone": "xs.surbl.org",
-    "name": "SURBL xs (snowshoe and pill domains)",
-    "url": "http://www.surbl.org/"
-  },
-  {
     "zone": "dnsrbl.swinog.ch",
     "name": "Swinog DNSRBL",
     "url": "http://antispam.imp.ch/06-dnsbl.php?lng=1"
