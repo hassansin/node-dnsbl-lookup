@@ -71,6 +71,13 @@ _see more examples in test.js_
 }
 ```
 
+### Reload list files on change:
+
+#####  lookup.setReloadListsOnChange(do_reload_lists_on_change)
+Sets wheter dnsbl-lookup should automatically reload the list files in the list folder when they're changed.
+
+ * `do_reload_lists_on_change`: boolean
+
 ### Command-line:
 
 ```bash     

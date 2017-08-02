@@ -1,14 +1,17 @@
 "use strict";
 
-var dnsbl_list = require('./list/dnsbl_list'), //source: http://multirbl.valli.org/list/
-  dnsbl_v6_list = require('./list/dnsbl_v6_list'), //source: http://multirbl.valli.org/list/
-  uribl_list = require('./list/uribl_list'), //source: http://multirbl.valli.org/list/
-  LIMIT = 200,
+var LIMIT = 200,
   async = require('async'), 
   dns = require('dns'),
   util = require('util'),
   net = require('net'),
-  events = require("events");
+  fs = require('fs'),
+  events = require("events"),
+  do_reload_lists_on_change = false;
+
+module.dnsbl_list = require('./list/dnsbl_list'),
+module.dnsbl_v6_list = require('./list/dnsbl_v6_list'),
+module.uribl_list = require('./list/uribl_list');
 
 //https://gist.github.com/Mottie/7018157
 function expandIPv6Address(address)
@@ -132,11 +135,11 @@ function dnsbl(ip_or_domain,list,limit){
   var root = this; 
    
   if(net.isIPv4(ip_or_domain)){    
-    list = list || dnsbl_list;
+    list = list || module.dnsbl_list;
     multi_lookup.call(this,ip_or_domain,list,limit);
   }  
   else if(net.isIPv6(ip_or_domain)){    
-    list = list || dnsbl_v6_list;
+    list = list || module.dnsbl_v6_list;
     multi_lookup.call(this,ip_or_domain,list,limit);
   }
   else{
@@ -146,7 +149,7 @@ function dnsbl(ip_or_domain,list,limit){
         root.emit('done');
       }
       else if(addresses){
-        list = list || dnsbl_list;
+        list = list || module.dnsbl_list;
         multi_lookup.call(root,addresses,list,limit);
       }
       else {
@@ -158,14 +161,69 @@ function dnsbl(ip_or_domain,list,limit){
 }
 
 function uribl(domain,list,limit){
-  list = list || uribl_list;  
+  list = list || module.uribl_list;  
 
   multi_lookup.call(this,domain,list,limit);
   events.EventEmitter.call(this);
 };
 
+function setReloadListsOnChange(new_do_reload_lists_on_change){
+  do_reload_lists_on_change = !!new_do_reload_lists_on_change; // Cast boolean
+}
+
+function initReloadListsOnChange()
+{
+  fs.watchFile('./list/dnsbl_list.json', function (curr, prev) {
+    if(do_reload_lists_on_change){
+      fs.readFile('./list/dnsbl_list.json', 'utf8', function (err,data) {
+        if(err) return; // Don't reload on error
+        try{
+          var new_list = JSON.parse(data);
+        }catch(e) // Don't reload on JSON error
+        {
+          return;
+        }
+        module.dnsbl_list = new_list;
+      });
+    }
+  });
+
+  fs.watchFile('./list/dnsbl_v6_list.json', function (curr, prev) {
+    if(do_reload_lists_on_change){
+      fs.readFile('./list/dnsbl_v6_list.json', 'utf8', function (err,data) {
+        if(err) return; // Don't reload on error
+        try{
+          var new_list = JSON.parse(data);
+        }catch(e) // Don't reload on JSON error
+        {
+          return;
+        }
+        module.dnsbl_v6_list = new_list;
+      });
+    }
+  });
+
+  fs.watchFile('./list/uribl_list.json', function (curr, prev) {
+    if(do_reload_lists_on_change){
+      fs.readFile('./list/uribl_list.json', 'utf8', function (err,data) {
+        if(err) return; // Don't reload on error
+        try{
+          var new_list = JSON.parse(data);
+        }catch(e) // Don't reload on JSON error
+        {
+          return;
+        }
+        module.uribl_list = new_list;
+      });
+    }
+  });
+}
+
+
+initReloadListsOnChange();
 util.inherits(dnsbl, events.EventEmitter);
 util.inherits(uribl,events.EventEmitter);
 exports.dnsbl = dnsbl;
 exports.uribl = uribl;
 exports.reverseIP = reverseIP;
+exports.setReloadListsOnChange = setReloadListsOnChange;
