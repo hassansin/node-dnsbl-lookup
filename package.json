@@ -1,9 +1,10 @@
 {
   "name": "dnsbl-lookup",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Node.js multi DNSBL/URIBL Lookup",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint bin/*.js test.js index.js",
     "test": "./node_modules/mocha/bin/mocha -R spec -t 60000"
   },
   "repository": {
@@ -26,7 +27,8 @@
     "command-line"
   ],
   "engines": {
-    "node": ""
+    "node": ">=10.15.3",
+    "npm": ">=6.4.1"
   },
   "bin": {
     "dnsbl-lookup": "bin/dnsbl-lookup"
@@ -42,9 +44,10 @@
   },
   "homepage": "https://github.com/hassansin/node-dnsbl-lookup",
   "dependencies": {
-    "async": "^0.9.0"
+    "async": "^2.6.2"
   },
   "devDependencies": {
-    "mocha": "^2.3.2"
+    "mocha": "^6.1.4",
+    "eslint": "^4.18.1"
   }
 }
